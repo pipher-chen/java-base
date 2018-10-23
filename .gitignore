@@ -13,6 +13,8 @@ out/
 mvnw
 mvnw.cmd
 *.back
+.gradle/
+build/
 
 # Eclipse
 .classpath
@@ -34,3 +36,4 @@ yarn-error.log*
 
 # gitext
 *.orig
+
