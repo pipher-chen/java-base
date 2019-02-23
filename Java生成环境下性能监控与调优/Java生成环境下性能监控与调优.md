@@ -111,8 +111,59 @@ XX参数
 	      XX:GCTimeRatio=19
 
 ### -Xmx -Xms ###
-不是X参数，而是XX参数
--Xms等价于-XX:InitialHeapSize
--Xmx等价于-XX:MaxHeapSize
+	不是X参数，而是XX参数
+	-Xms等价于-XX:InitialHeapSize
+	-Xmx等价于-XX:MaxHeapSize
+	
+	[root]#jinfo -flag MaxHeapSize 23789(进程号)
+	-XX:MaxHeapSize=268435456
+	
+	[root]#jinfo -flag THreadStackSize 23789(进程号)
+	-XX:THreadStackSize=1024
+
+## 查看JVM运行时参数 ##
+	-XX:+PrintFlagsInitial
+	-XX:+PrintFlagsFinal
+	-XX:+UnlockExperimentalVMOptions解锁实验参数
+	-XX:+PrintCommandLineFlags打印命令行参数
+
+### PrintFlagsFinal ###
+    java --XX:+PrintFlagsFinal -version 显示如下：
+
+	bool UseG1GC = false
+	bool UseGCLogFileRotation = false
+	bool UseGCverheadLimit = true
+	
+	uintx InitialHeapSize :=130023424
+	uintx MaxHeapSize := 2053111808
+	uintx MaxNewSize := 684195840
+
+	=表示默认值
+	:=被用户或者JVM修改后的值
+
+### jps ###
+查看Java相关进程
+jps -help  
+	[root]#jps -l
+	17640 sum.tools.jsp.Jps
+
+### jinfo ###
+	jinfo 举例
+	查看最大内存
+	jinfo -flag MaxHeapSize 3176(pid)
+	-XX:MaxHeapSize=2147483648
+	查看垃圾回收器
+	jinfo -flag UseConcMarkSweepGC 3176
+	-XX:-UseConcMarkSweepGC
+	
+	jinfo -flag UseGlGC 3176
+	-XX:-UseGlGC
+	
+	jinfo -flag UseParallelGC 3176
+	-XX:-UseParallelGC
+
+
+
+
 
 
